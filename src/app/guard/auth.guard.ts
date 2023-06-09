@@ -19,11 +19,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     console.log('guard working');
-    this.tokenService.getObseverForAuthGuard().subscribe({
-      error: (val: boolean) => {
-        this.route.navigateByUrl('/auth/login');
-      },
-    });
-    return this.tokenService.getObseverForAuthGuard();
+    // this.tokenService.getObseverForAuthGuard().subscribe({
+    //   error: (val: boolean) => {
+    //     this.route.navigateByUrl('/auth/login');
+    //   },
+    // });
+    //return this.tokenService.getObseverForAuthGuard();
+    return of(true);
   }
 }

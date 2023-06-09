@@ -1,0 +1,14 @@
+<div class="container-tab-conversation" [class.activeTab]="inf.active">
+    <div class="avatar-tab-wrapper">
+        <div class="avatar-tab-wrapper">
+            <img [src]="inf.avatar">
+        </div>
+
+    </div>
+    <div class="contentTab-container">
+        <div class="name-tab-conversation">{{inf.name}}</div>
+        <div class="lastMessage-tab">{{(inf.lastMessage.you ? 'You: ' : '')
+            +
+            inf.lastMessage.content}}</div>
+    </div>
+</div>
