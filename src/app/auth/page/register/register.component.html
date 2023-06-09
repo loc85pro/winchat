@@ -1,0 +1,37 @@
+<div class="registerPage-container">
+    <form (ngSubmit)="submit($event)" [formGroup]="registerForm">
+        <h2>REGISTER</h2>
+        <div class="input-group-register">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+                <mat-error *ngIf="registerForm.get('username')?.invalid">This
+                    username is
+                    already exists</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" hintLabel="Min 7 characters">
+                <mat-label>Password</mat-label>
+                <input #passwordInput matInput formControlName="password">
+                <mat-hint
+                    align="end">{{passwordInput.value.length}}/7</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Full name</mat-label>
+                <input matInput formControlName="fullname" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email" />
+                <mat-error *ngIf="registerForm.get('email')?.invalid">Not a
+                    valid
+                    email</mat-error>
+            </mat-form-field>
+        </div>
+        <div>Have account yet? <a routerLink="/login">Login here</a></div>
+        <br>
+        <button mat-raised-button color="primary" type="submit">SIGN UP</button>
+    </form>
+</div>

@@ -1,0 +1,23 @@
+.loginPage-container {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fd;
+  padding: 10vh;
+  & .form-login-container {
+    display: inline-block;
+    height: 80%;
+    width: 30%;
+    padding: 20px;
+    box-shadow: 2px 2px 20px 2px grey;
+    border-radius: 10px;
+    background-color: #ffff;
+    text-align: center;
+    & mat-form-field {
+      width: 80%;
+    }
+    & .sign-up-link {
+      margin-top: 20px;
+    }
+  }
+}

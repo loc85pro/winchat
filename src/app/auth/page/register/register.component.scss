@@ -1,0 +1,20 @@
+.registerPage-container {
+  width: 100vw;
+  text-align: center;
+  background-color: #f8f9fd;
+  & form {
+    box-shadow: 2px 2px 20px 2px grey;
+    background-color: #ffff;
+    margin: 10vh;
+    padding: 20px 5px;
+    display: inline-block;
+    width: 30%;
+    border-radius: 10px;
+    & .input-group-register {
+      padding: 20px;
+      & mat-form-field {
+        display: block;
+      }
+    }
+  }
+}
