@@ -1,6 +1,7 @@
 .container_listConversation {
   border: 1px solid red;
   width: 350px;
+  max-height: 100vh;
   & .header-list-container {
     min-height: 50px;
     padding: 3px 20px;
@@ -27,8 +28,8 @@
     }
   }
   & .list-conversationTab-container {
-    max-height: calc(100vh - 50px);
-    overflow-y: auto;
+    max-height: calc(100vh - 60px);
+    overflow-y: scroll;
 
     &::-webkit-scrollbar {
       width: 8px;

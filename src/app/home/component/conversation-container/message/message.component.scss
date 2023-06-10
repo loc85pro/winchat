@@ -1,0 +1,21 @@
+.message-container {
+  margin: 1px;
+  & .content-message-wrapper {
+    width: auto;
+    border-radius: 18px;
+    background-color: #e4e6eb;
+    display: inline-block;
+    padding: 8px 12px;
+  }
+}
+
+.own-message {
+  display: flex;
+  flex-direction: row-reverse;
+  & .content-message-wrapper {
+    background-color: #0084ff;
+    color: white;
+    max-width: 30vw;
+    word-wrap: break-word;
+  }
+}
