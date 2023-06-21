@@ -6,7 +6,7 @@
         </div>
     </div>
     <div class="list-conversationTab-container">
-        <app-conversation-tab *ngFor="let con of conversations"
-            [inf]="con"></app-conversation-tab>
+        <app-conversation-tab *ngFor="let con of conversations; let i=index"
+            [inf]="con" (focusMe)="focusTab($event)"></app-conversation-tab>
     </div>
 </div>

@@ -3,6 +3,7 @@ export interface conversationTab {
   name: string;
   avatar: string;
   active: boolean;
+  focus: boolean;
   lastMessage: {
     content: string;
     you: boolean;

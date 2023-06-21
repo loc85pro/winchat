@@ -1,8 +1,7 @@
 export interface Message {
+  id: string;
   content: string;
-  react: string;
   type: string;
-  user: string;
+  username: string;
   conversationId: string;
-  own: boolean;
 }

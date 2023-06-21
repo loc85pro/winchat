@@ -7,6 +7,7 @@ import { ConversationContainerComponent } from './component/conversation-contain
 import { ConversationTabComponent } from './component/list-conversation/conversation-tab/conversation-tab.component';
 import { MessageComponent } from './component/conversation-container/message/message.component';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
     ConversationTabComponent,
     MessageComponent,
   ],
-  imports: [CommonModule, RouterModule.forChild(routes), MatIconModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    MatIconModule,
+    FormsModule,
+  ],
 })
 export class HomeModule {}

@@ -1,4 +1,5 @@
-<div class="container-tab-conversation" [class.activeTab]="inf.active">
+<div class="container-tab-conversation" [class.activeTab]="inf.active"
+    [class.focusTab]="inf.focus" (click)="handleClick()">
     <div class="avatar-tab-wrapper">
         <div class="avatar-tab-wrapper">
             <img [src]="inf.avatar">
