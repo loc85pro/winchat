@@ -1,36 +1,46 @@
 <div class="conversation-container-wrapper">
-    <div class="header-conversation-container">
-        <div class="header-conversation-container-userInf">
-            <div class="header-conversation-container-userInf-avatar-wrapper">
-                <img [src]="avatarUrl" alt="avatar">
-            </div>
-            <span class="header-conversation-container-userInf-name">
-                {{name}}
-            </span>
-        </div>
-        <div class="header-conversation-container-control">
-            <div class="wrapper-icon-header-control">
-                <mat-icon>more_horiz</mat-icon>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="wrapper-content-conversation-container">
-            <app-message *ngFor="let message of messages"
-                [data]="message"></app-message>
-        </div>
-        <div class="wrapper-bottom-conversation">
-            <div class="wrapper-icon-group-input">
-                <span class="icon-wrapper-input"><mat-icon>add_circle</mat-icon>
+    <div *ngIf="data; else noConversationSelected">
+        <div class="header-conversation-container">
+            <div class="header-conversation-container-userInf">
+                <div
+                    class="header-conversation-container-userInf-avatar-wrapper">
+                    <img src="http://localhost:8080/user/get_avatar?username={{userOther.username}}"
+                        alt="avatar">
+                </div>
+                <span class="header-conversation-container-userInf-name">
+                    {{userOther.nickname}}
                 </span>
-                <span
-                    class="icon-wrapper-input"><mat-icon>image</mat-icon></span>
             </div>
+            <div class="header-conversation-container-control">
+                <div class="wrapper-icon-header-control">
+                    <mat-icon>more_horiz</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="wrapper-content-conversation-container">
+                <app-message *ngFor="let message of data.message"
+                    [data]="message"></app-message>
+            </div>
+            <div class="wrapper-bottom-conversation">
+                <div class="wrapper-icon-group-input">
+                    <span
+                        class="icon-wrapper-input"><mat-icon>add_circle</mat-icon>
+                    </span>
+                    <span
+                        class="icon-wrapper-input"><mat-icon>image</mat-icon></span>
+                </div>
+                <form (submit)="sendMessage()"><input [(ngModel)]="message"
+                        name="messageInput">
+                </form>
 
-            <input>
-            <span
-                class="icon-wrapper-input"><mat-icon>insert_emoticon</mat-icon></span>
+                <span
+                    class="icon-wrapper-input"><mat-icon>insert_emoticon</mat-icon></span>
 
+            </div>
         </div>
     </div>
+    <ng-template #noConversationSelected>
+        No conversation selected
+    </ng-template>
 </div>

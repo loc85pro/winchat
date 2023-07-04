@@ -1,35 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Message } from '../../model/message.model';
+import { HomeService } from '../../service/home.service';
+import { Observer, Observable, Subscription } from 'rxjs';
+import { Conversation } from '../../model/conversation.model';
+import { User } from '../../model/user.model';
+import { Participant } from '../../model/participant.model';
 
 @Component({
   selector: 'app-conversation-container',
   templateUrl: './conversation-container.component.html',
   styleUrls: ['./conversation-container.component.scss'],
 })
-export class ConversationContainerComponent {
-  avatarUrl: string = 'http://localhost:8080/user/get_avatar?username=loc85pro';
-  name: string = 'Cục cưng 13';
-  messages: Message[] = [
-    {
-      id: '123',
-      content: 'Haiz',
-      type: 'text/plain',
-      username: 'quangtan',
-      conversationId: '123',
-    },
-    {
-      id: '123',
-      content: 'Giờ ra jiang nam mà thấy ngồi với em nào thì',
-      type: 'text/plain',
-      username: 'quangtan',
-      conversationId: '123',
-    },
-    {
-      id: '123',
-      content: 'Chắc nay ở phòng đi',
-      type: 'text/plain',
-      username: 'loc26',
-      conversationId: '123',
-    },
-  ];
+export class ConversationContainerComponent implements OnChanges, OnInit {
+  data: Conversation;
+  userOther: Participant;
+  message: String;
+  constructor(private homeService: HomeService) {}
+
+  ngOnInit(): void {
+    this.homeService.currentConversation$.subscribe((val) => (this.data = val));
+    this.homeService.currentParticipant$.subscribe(
+      (val) => (this.userOther = val)
+    );
+  }
+  ngOnChanges(): void {
+    console.log(this.userOther);
+  }
+
+  sendMessage() {
+    console.log('Submit complete');
+    if (this.message != '') {
+      this.homeService.sendMessage(
+        this.homeService.currentConversation,
+        this.message
+      );
+    }
+    this.message = '';
+  }
 }

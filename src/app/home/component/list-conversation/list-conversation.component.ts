@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { conversationTab } from '../../model/conversation-tab.model';
 import { HomeService } from '../../service/home.service';
-import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Conversation } from '../../model/conversation.model';
 import { User } from '../../model/user.model';
+import { CompatClient } from '@stomp/stompjs';
 
 @Component({
   selector: 'app-list-conversation',
@@ -12,63 +11,41 @@ import { User } from '../../model/user.model';
 })
 export class ListConversationComponent implements OnInit {
   focusList: boolean[] = [];
-  conversations: conversationTab[] = [];
-  conversation$: BehaviorSubject<conversationTab[]> = new BehaviorSubject<
-    conversationTab[]
-  >([]);
+  conversations: Conversation[] = [];
+  currentConversation: Conversation;
   currentUser: User;
   constructor(private homeService: HomeService) {}
   ngOnInit(): void {
-    this.homeService.currentUser$.subscribe(
-      (data) => (this.currentUser = { ...data })
-    );
-    this.homeService.preparedData$.subscribe((val: Conversation[]) => {
-      console.log(val);
-      this.updateConversationTab(val);
-      console.log(val.length);
+    this.homeService.prepareData();
+    this.homeService.data$.subscribe({
+      next: (val) => {
+        console.log('This is data refresh');
+        this.conversations = [...val];
+      },
     });
+    this.homeService.currentUser$.subscribe(
+      (val) => (this.currentUser = { ...val })
+    );
+    this.homeService.currentConversation$.subscribe(
+      (val) => (this.currentConversation = { ...val })
+    );
   }
-  setFocus(inf: conversationTab) {
+  setFocus(inf: Conversation) {
     this.conversations = this.conversations.map((val) =>
       val.id == inf.id
         ? { ...val, focus: true, active: false }
         : { ...val, focus: false }
     );
-    this.conversation$.next(this.conversations);
   }
-  updateConversationTab(data: Conversation[]): void {
-    this.conversations = data.map((val: Conversation) =>
-      this.convertConToTab(val)
-    );
-    this.conversation$.next(this.conversations);
-  }
+  updateConversation(data: Conversation[]): void {}
 
-  focusTab(tab: conversationTab): void {
-    this.conversations.forEach((val: conversationTab) => {
-      if (val.id == tab.id) {
-        val.focus = true;
-        val.active = false;
-      } else val.focus = false;
-    });
-    this.conversation$.next(this.conversations);
+  focusTab(tab: Conversation): void {
+    this.homeService.currentConversation = tab;
+    this.currentConversation = tab;
+    this.homeService.seenConversation(tab.id);
+    this.homeService.setCurrentConversation(tab);
   }
-
-  convertConToTab(con: Conversation): conversationTab {
-    console.log(con);
-    return {
-      id: con.id,
-      name: con.name,
-      avatar:
-        'http://localhost:8080/user/get_avatar?username=' +
-        (con.participant[0].username == this.currentUser.username
-          ? con.participant[1].username
-          : con.participant[0].username),
-      active: con.seen,
-      focus: false,
-      lastMessage: {
-        content: con.message[0].content,
-        you: con.message[0].username == this.currentUser.username,
-      },
-    };
+  handleAddConversation() {
+    console.log('Adding');
   }
 }

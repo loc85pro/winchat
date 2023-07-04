@@ -11,8 +11,10 @@ import { HomeService } from 'src/app/home/service/home.service';
 })
 export class MessageComponent implements OnInit {
   @Input() data: Message;
+  own: boolean = false;
   constructor(private homeService: HomeService) {}
   ngOnInit(): void {
-    // this.currentUser$ = this.homeService.currentUser$;
+    if (this.homeService.currentUser.username == this.data.username)
+      this.own = true;
   }
 }

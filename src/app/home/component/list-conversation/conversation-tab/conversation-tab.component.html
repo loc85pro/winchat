@@ -1,15 +1,16 @@
-<div class="container-tab-conversation" [class.activeTab]="inf.active"
-    [class.focusTab]="inf.focus" (click)="handleClick()">
+<div class="container-tab-conversation" [class.activeTab]="!inf.seen"
+    [class.focusTab]="isFocus" (click)="handleClick()">
     <div class="avatar-tab-wrapper">
         <div class="avatar-tab-wrapper">
-            <img [src]="inf.avatar">
+            <img [src]="avatar">
         </div>
 
     </div>
     <div class="contentTab-container">
-        <div class="name-tab-conversation">{{inf.name}}</div>
-        <div class="lastMessage-tab">{{(inf.lastMessage.you ? 'You: ' : '')
+        <div class="name-tab-conversation">{{participant.nickname}}</div>
+        <div class="lastMessage-tab">{{(inf.message[0].username ==
+            participant.username ? ' ' : 'You: ')
             +
-            inf.lastMessage.content}}</div>
+            inf.message[inf.message.length-1].content}}</div>
     </div>
 </div>

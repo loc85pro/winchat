@@ -1,12 +1,14 @@
 <div class="container_listConversation">
     <div class="header-list-container">
         <h1>Chats</h1>
-        <div class="wrapperCreateConversationIcon">
+        <div class="wrapperCreateConversationIcon"
+            (click)="handleAddConversation()">
             <mat-icon>add_circle_outline</mat-icon>
         </div>
     </div>
-    <div class="list-conversationTab-container">
-        <app-conversation-tab *ngFor="let con of conversations; let i=index"
-            [inf]="con" (focusMe)="focusTab($event)"></app-conversation-tab>
+    <div class="list-conversationTab-container" *ngIf="conversations.length>0">
+        <app-conversation-tab *ngFor="let con of conversations" [inf]="con"
+            (focusMe)="focusTab($event)"
+            [isFocus]="currentConversation ? currentConversation.id == con.id : false"></app-conversation-tab>
     </div>
 </div>
