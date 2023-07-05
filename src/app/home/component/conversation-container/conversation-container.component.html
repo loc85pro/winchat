@@ -18,7 +18,8 @@
             </div>
         </div>
         <div>
-            <div class="wrapper-content-conversation-container">
+            <div class="wrapper-content-conversation-container"
+                #containerConversation>
                 <app-message *ngFor="let message of data.message"
                     [data]="message"></app-message>
             </div>
@@ -30,8 +31,8 @@
                     <span
                         class="icon-wrapper-input"><mat-icon>image</mat-icon></span>
                 </div>
-                <form (submit)="sendMessage()"><input [(ngModel)]="message"
-                        name="messageInput">
+                <form (submit)="sendMessage()"><input class="input-message"
+                        [(ngModel)]="message" name="messageInput">
                 </form>
 
                 <span

@@ -1,0 +1,10 @@
+<div class="add-panel-container">
+    <form (submit)="handleSubmit()">
+        <div class="div" *ngIf="errorMessage!=''">
+            {{errorMessage}}
+        </div>
+        <input name="username" placeholder="Enter username"
+            [(ngModel)]="username">
+        <button>CREATE</button>
+    </form>
+</div>

@@ -8,7 +8,8 @@
     </div>
     <div class="contentTab-container">
         <div class="name-tab-conversation">{{participant.nickname}}</div>
-        <div class="lastMessage-tab">{{(inf.message[0].username ==
+        <div class="lastMessage-tab" *ngIf="inf.message.length>0">
+            {{(inf.message[0].username ==
             participant.username ? ' ' : 'You: ')
             +
             inf.message[inf.message.length-1].content}}</div>

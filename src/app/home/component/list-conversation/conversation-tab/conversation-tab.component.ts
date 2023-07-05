@@ -44,6 +44,7 @@ export class ConversationTabComponent implements OnInit, OnChanges {
   }
   handleClick(): void {
     this.homeService.seenConversation(this.inf.id);
+    this.inf.seen = true;
     this.homeService.setCurrentConversation(this.inf);
     this.homeService.setCurrentSocket(this.socket);
   }

@@ -14,6 +14,8 @@ export class ListConversationComponent implements OnInit {
   conversations: Conversation[] = [];
   currentConversation: Conversation;
   currentUser: User;
+  isShowPanel: boolean = false;
+  isShowSetting: boolean = false;
   constructor(private homeService: HomeService) {}
   ngOnInit(): void {
     this.homeService.prepareData();
@@ -46,6 +48,19 @@ export class ListConversationComponent implements OnInit {
     this.homeService.setCurrentConversation(tab);
   }
   handleAddConversation() {
-    console.log('Adding');
+    if (this.isShowSetting && !this.isShowPanel) {
+      this.isShowSetting = false;
+      this.isShowPanel = true;
+      return;
+    }
+    this.isShowPanel = !this.isShowPanel;
+  }
+  handleSetting() {
+    if (this.isShowPanel && !this.isShowSetting) {
+      this.isShowPanel = false;
+      this.isShowSetting = true;
+      return;
+    }
+    this.isShowSetting = !this.isShowSetting;
   }
 }

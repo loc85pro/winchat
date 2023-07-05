@@ -1,9 +1,13 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
-import { Message } from '../../model/message.model';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  ViewChild,
+  ElementRef,
+  AfterContentChecked,
+} from '@angular/core';
 import { HomeService } from '../../service/home.service';
-import { Observer, Observable, Subscription } from 'rxjs';
 import { Conversation } from '../../model/conversation.model';
-import { User } from '../../model/user.model';
 import { Participant } from '../../model/participant.model';
 
 @Component({
@@ -11,7 +15,10 @@ import { Participant } from '../../model/participant.model';
   templateUrl: './conversation-container.component.html',
   styleUrls: ['./conversation-container.component.scss'],
 })
-export class ConversationContainerComponent implements OnChanges, OnInit {
+export class ConversationContainerComponent
+  implements OnChanges, OnInit, AfterContentChecked
+{
+  @ViewChild('containerConversation') private chatScrollContainer: ElementRef;
   data: Conversation;
   userOther: Participant;
   message: String;
@@ -22,9 +29,13 @@ export class ConversationContainerComponent implements OnChanges, OnInit {
     this.homeService.currentParticipant$.subscribe(
       (val) => (this.userOther = val)
     );
+    this.scrollToBottom();
   }
   ngOnChanges(): void {
     console.log(this.userOther);
+  }
+  ngAfterContentChecked(): void {
+    this.scrollToBottom();
   }
 
   sendMessage() {
@@ -36,5 +47,11 @@ export class ConversationContainerComponent implements OnChanges, OnInit {
       );
     }
     this.message = '';
+  }
+  scrollToBottom() {
+    try {
+      this.chatScrollContainer.nativeElement.scrollTop =
+        this.chatScrollContainer.nativeElement.scrollHeight;
+    } catch (error) {}
   }
 }

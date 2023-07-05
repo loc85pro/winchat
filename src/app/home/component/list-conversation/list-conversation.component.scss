@@ -12,7 +12,11 @@
       font-size: 30px;
       margin: 0;
     }
+    .wraper-icon {
+      display: flex;
+    }
     .wrapperCreateConversationIcon {
+      margin-left: 5px;
       display: flex;
       justify-content: center;
       align-items: center;

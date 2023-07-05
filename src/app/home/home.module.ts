@@ -8,6 +8,8 @@ import { ConversationTabComponent } from './component/list-conversation/conversa
 import { MessageComponent } from './component/conversation-container/message/message.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { NewConversationComponent } from './component/list-conversation/new-conversation/new-conversation.component';
+import { SettingComponent } from './component/setting/setting.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,8 @@ const routes: Routes = [
     ConversationContainerComponent,
     ConversationTabComponent,
     MessageComponent,
+    NewConversationComponent,
+    SettingComponent,
   ],
   imports: [
     CommonModule,

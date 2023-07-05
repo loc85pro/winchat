@@ -1,0 +1,11 @@
+<div class="setting-container">
+    <div (click)="showUpdatePanel = true">Upload avatar</div>
+    <div (click)="handleSignout()">Sign out</div>
+</div>
+<div class="updatePanel" *ngIf="showUpdatePanel">
+    <form (submit)="handleUpload()">
+        <input type="file" (change)="onFileSelected($event)"
+            name="inputUploadFile">
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,22 @@
+.add-panel-container {
+  position: absolute;
+  left: 300px;
+  top: 50px;
+  & form {
+    padding: 10px;
+    box-shadow: 1px 1px 3px 3px grey;
+    border-radius: 10px;
+    background-color: aliceblue;
+    & input {
+      display: block;
+      margin: 10px;
+    }
+    & button {
+      display: block;
+      margin: 0 auto;
+    }
+    & div {
+      color: red;
+    }
+  }
+}

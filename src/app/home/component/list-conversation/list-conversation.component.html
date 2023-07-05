@@ -1,9 +1,15 @@
 <div class="container_listConversation">
     <div class="header-list-container">
         <h1>Chats</h1>
-        <div class="wrapperCreateConversationIcon"
-            (click)="handleAddConversation()">
-            <mat-icon>add_circle_outline</mat-icon>
+        <div class="wraper-icon">
+            <div class="wrapperCreateConversationIcon"
+                (click)="handleAddConversation()">
+                <mat-icon>add_circle_outline</mat-icon>
+            </div>
+            <div class="wrapperCreateConversationIcon"
+                (click)="handleSetting()">
+                <mat-icon>settings</mat-icon>
+            </div>
         </div>
     </div>
     <div class="list-conversationTab-container" *ngIf="conversations.length>0">
@@ -11,4 +17,7 @@
             (focusMe)="focusTab($event)"
             [isFocus]="currentConversation ? currentConversation.id == con.id : false"></app-conversation-tab>
     </div>
+    <app-new-conversation *ngIf="isShowPanel"
+        (isShow)="handleAddConversation()"></app-new-conversation>
+    <app-setting *ngIf="isShowSetting" (isShow)="handleSetting()"></app-setting>
 </div>

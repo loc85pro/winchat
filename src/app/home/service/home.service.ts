@@ -118,10 +118,7 @@ export class HomeService {
         this.data.forEach((val, i) => {
           if (this.data[i].id == id) {
             this.data[i].message.push(JSON.parse(message.body));
-            console.log(
-              'This is message: ',
-              this.data[i].message[this.data.length - 1]
-            );
+            this.data[i].seen = false;
             this.data$.next(this.data);
             console.log(this.data);
           }
